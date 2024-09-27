@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'war' // Enable WAR plugin for web application
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0' // Servlet API dependency
+    implementation 'mysql:mysql-connector-java:8.0.33' // MySQL Connector/J dependency
+    
+    // JUnit 5 dependencies
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1' // JUnit API
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1' // JUnit Engine
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(20) // Use Java 20
+    }
+}
+
+// Explicitly declare the JUnit platform for tests
+tasks.named('test') {
+    useJUnitPlatform()
+
+    // Set the test framework to JUnit Jupiter
+    testFramework {
+        name = 'JUnit Jupiter'
+        // You can specify additional configurations here if needed
+    }
+}
+
+tasks.named('war') {
+    // Configure the WAR task if needed
+}
+
